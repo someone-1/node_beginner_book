@@ -11,11 +11,12 @@ function start(route, handle) {
 
 		var pathname = url.parse(request.url).pathname;
 		console.log("Request for " + pathname + " received.");
-		response.writeHead(200, {"Content-Type": "text/plain"});
 		
-		var content = route(handle, pathname)
-		response.write(content);
-		response.end();
+
+		// sending response object as parameter ->router -> requesthandlers
+		// 
+		route(handle, pathname , response)
+		
 	}
 	http.createServer(onRequest).listen(8080);
 	console.log("Server has started.");
